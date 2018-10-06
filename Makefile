@@ -2,7 +2,7 @@
 
 PHONY : all
 
-TARGET_NAME ?= can_app
+TARGET_NAME ?= linux_app
 
 AS	= $(CROSS_COMPILE)as
 LD	= $(CROSS_COMPILE)ld
