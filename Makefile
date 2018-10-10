@@ -2,7 +2,7 @@
 
 PHONY : all
 
-TARGET_NAME ?= linux_app
+TARGET_NAME ?= bin/linux_app
 
 AS	= $(CROSS_COMPILE)as
 LD	= $(CROSS_COMPILE)ld
@@ -47,6 +47,7 @@ $(dirs): FORCE
 objs := init/main.o
 
 all: $(dirs) ${objs}
+	@mkdir -p bin
 	$(CC) ${CFLAGS} ${LINK_PATH} -o ${TARGET_NAME} ${objs} ${LD_LIBS}
 
 test_dirs := tests/
