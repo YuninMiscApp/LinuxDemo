@@ -32,6 +32,8 @@ extern "C" {
 /* Exported variables --------------------------------------------------------*/
 /* Exported macro ------------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */
+int file_write(const char *path,const void *data,unsigned int len);
+int file_read(const char *path,void *data,unsigned int len);
 
 #ifdef  __cplusplus
 }

@@ -15,6 +15,10 @@
   */ 
 
 /* Includes ------------------------------------------------------------------*/
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <unistd.h>
 
 #include "file.h"
 
@@ -27,6 +31,58 @@ extern "C" {
 /* Private variables ---------------------------------------------------------*/
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
+
+
+
+//open/close/read/write
+
+/*
+ * 写文件, 原子操作
+ */
+int file_write(const char *path,const void *data,unsigned int len)
+{
+	int fd;
+	int size = -1;
+	fd = open(path,O_WRONLY|O_CREAT,0777);
+	if(fd < 0)
+	{
+		printf("open %s fail...\n",path);
+		return -1;
+	}
+	size = write(fd,data,len);
+	if(size != len)
+	{
+		printf("write %s fail...\n",path);
+		return -1;
+	}
+	close(fd);
+	return 0;
+}
+
+/*
+ * 读文件, 原子操作
+ */
+int file_read(const char *path,void *data,unsigned int len)
+{
+	int fd;
+	int size = -1;
+	fd = open(path,O_RDONLY,0777);
+	if(fd < 0)
+	{
+		printf("open %s fail...\n",path);
+		return -1;
+	}
+	size = read(fd,data,len);
+	if(size != len)
+	{
+		printf("read %s fail...\n",path);
+		return -1;
+	}
+	close(fd);
+	return 0;
+}
+
+
 
 #ifdef  __cplusplus
 }

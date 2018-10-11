@@ -15,6 +15,7 @@
   */ 
 
 /* Includes ------------------------------------------------------------------*/
+#include <string.h>
 
 #include "file.h"
 
@@ -28,10 +29,30 @@ extern "C" {
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
 
+typedef struct student_info_s{
+	int age;
+	char name[128];
+	int level;
+}student_info_t;
 
 int main(int argc, char *argv[])
 {
-	printf("This is The test file.\n");
+	student_info_t s;
+	memset(&s,0,sizeof(s));
+	s.age = 10;
+	strncpy(s.name,"peter",sizeof(s.name));
+	s.level = 6;
+
+	file_write("./students.bin",&s,sizeof(s));
+
+	//
+	memset(&s,0,sizeof(s));
+
+	file_read("./students.bin",&s,sizeof(s));
+
+	printf("name: %s , age: %d ,level : %d\n",
+	s.name,s.age,s.level);
+	
 	return 0;
 }
 
