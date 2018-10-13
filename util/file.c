@@ -73,7 +73,7 @@ int file_read(const char *path,void *data,unsigned int len)
 		return -1;
 	}
 	size = read(fd,data,len);
-	if(size != len)
+	if(size < 0)
 	{
 		printf("read %s fail...\n",path);
 		return -1;

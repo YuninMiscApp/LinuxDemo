@@ -16,6 +16,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include <stdio.h>
+#include<stdlib.h>
 
 #ifdef  __cplusplus
 extern "C" {
@@ -26,12 +27,43 @@ extern "C" {
 /* Private variables ---------------------------------------------------------*/
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
+struct student_type
+{
+int num;
+char name[10];
+char addr[15];
+}student={1001,"liangbin","yuanchunroad"};
+FILE *fp;
+void save()
+{
+if((fp=fopen("stu.dat","wb"))==NULL)
+{
+printf("can not open file\n");
+return;
+}
+if(fwrite(&student,sizeof(struct student_type),1,fp)!=1)
+	printf("file write error\n");
+fclose(fp);
+}
+void print_file()
+{
+if((fp=fopen("stu.dat","rb"))==NULL)
+{
+ printf("can not open file\n");
+ exit(0);
+}
+fread(&student,sizeof(struct student_type),1,fp);
+printf("%d,%s,%s",student.num,student.name,student.addr);
+fclose (fp);
+}
+
 
 
 int main(int argc, char *argv[])
 {
-	printf("hello world!\n");
-	return 0;
+save();
+print_file();
+return 0;
 }
 
 

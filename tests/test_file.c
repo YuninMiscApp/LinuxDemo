@@ -29,33 +29,15 @@ extern "C" {
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
 
-typedef struct student_info_s{
-	int age;
-	char name[128];
-	int level;
-}student_info_t;
 
 int main(int argc, char *argv[])
 {
-	student_info_t s;
-	memset(&s,0,sizeof(s));
-	s.age = 10;
-	strncpy(s.name,"peter",sizeof(s.name));
-	s.level = 6;
+    char msg[50]={0};
 
-	file_write("./students.bin",&s,sizeof(s));
-
-	//
-	memset(&s,0,sizeof(s));
-
-	file_read("./students.bin",&s,sizeof(s));
-
-	printf("name: %s , age: %d ,level : %d\n",
-	s.name,s.age,s.level);
-	
-	return 0;
+	file_read("/mnt/hgfs/share/hello.txt",msg,sizeof(msg));
+	printf("%s\n",msg);
+ 	return 0;
 }
-
 
 #ifdef  __cplusplus
 }
