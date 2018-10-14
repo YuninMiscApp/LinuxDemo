@@ -31,6 +31,8 @@ LINK_PATH := -L libs
 LD_LIBS := 
 LD_LIBS += -lkernel
 LD_LIBS += -lutil
+LD_LIBS += -lpthread
+
 
 export TEST_CFLAGS LINK_PATH LD_LIBS
 
