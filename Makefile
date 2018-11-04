@@ -21,6 +21,10 @@ CFLAGS += -I include
 CFLAGS += -I util
 CFLAGS += -I kernel
 
+
+
+
+
 LDFLAGS = 
 LDFLAGS += -fPIC -rdynamic -shared 
 
@@ -32,7 +36,8 @@ LD_LIBS :=
 LD_LIBS += -lkernel
 LD_LIBS += -lutil
 LD_LIBS += -lpthread
-
+LD_LIBS += -lnetwork
+LD_LIBS += -lipc
 
 export TEST_CFLAGS LINK_PATH LD_LIBS
 
@@ -40,7 +45,7 @@ MAKEFILE_BUILD := script/Makefile.build
 MAKEFILE_TEST_BUILD := script/Makefile.test.build
 export MAKEFILE_BUILD MAKEFILE_TEST_BUILD
 
-dirs := util/ kernel/
+dirs := util/ kernel/ network/ ipc/
 dirs := ${patsubst %/,%,$(filter %/, $(dirs))}
 PHONY += $(dirs)
 $(dirs): FORCE

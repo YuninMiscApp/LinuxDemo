@@ -1,0 +1,1 @@
+char *create_pipe(char * pipename);
